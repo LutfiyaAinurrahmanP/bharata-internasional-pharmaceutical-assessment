@@ -6,6 +6,7 @@ import { Plus, Search, Package } from 'lucide-react';
 import AddProductModal from '@/components/AddProductModal';
 import EditProductModal from '@/components/EditProductModal';
 import DeleteConfirmModal from '@/components/DeleteConfirmModal';
+import ProductDetailModal from '@/components/ProductDetailModal';
 
 type Product = {
   id: string;
@@ -20,6 +21,7 @@ export default function ProductsPage() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [detailProductId, setDetailProductId] = useState<string | null>(null);
   const [productToDelete, setProductToDelete] = useState<Product | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -138,6 +140,7 @@ export default function ProductsPage() {
                       )}
                     </td>
                     <td className="px-6 py-4">
+                        <button onClick={() => setDetailProductId(p.id)} className="text-emerald-500 hover:text-emerald-700 font-semibold mr-3 text-sm">Detail</button>
                         <button onClick={() => setEditingProduct(p)} className="text-blue-500 hover:text-blue-700 font-semibold mr-3 text-sm">Edit</button>
                         <button onClick={() => setProductToDelete(p)} className="text-red-500 hover:text-red-700 font-semibold text-sm">Hapus</button>
                     </td>
@@ -198,6 +201,12 @@ export default function ProductsPage() {
         loading={isDeleting}
         title="Hapus Produk"
         message={`Apakah Anda yakin ingin menghapus produk "${productToDelete?.name}"? Tindakan ini tidak dapat dibatalkan.`}
+      />
+
+      <ProductDetailModal 
+        isOpen={!!detailProductId}
+        onClose={() => setDetailProductId(null)}
+        productId={detailProductId}
       />
     </div>
   );

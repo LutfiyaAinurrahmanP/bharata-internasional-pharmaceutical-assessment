@@ -17,6 +17,7 @@ var (
 type OrderService interface {
 	CreateOrder(ctx context.Context, order *models.Order) error
 	GetAllOrders(ctx context.Context) ([]models.Order, error)
+	DeleteOrdersByProduct(ctx context.Context, productID string) error
 }
 
 type orderService struct {
@@ -69,4 +70,8 @@ func (s *orderService) CreateOrder(ctx context.Context, order *models.Order) err
 
 func (s *orderService) GetAllOrders(ctx context.Context) ([]models.Order, error) {
 	return s.repo.FindAll(ctx)
+}
+
+func (s *orderService) DeleteOrdersByProduct(ctx context.Context, productID string) error {
+	return s.repo.DeleteByProductID(ctx, productID)
 }

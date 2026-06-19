@@ -114,7 +114,6 @@ export default function OrdersPage() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-slate-50/50 border-b border-slate-100 text-slate-500 text-sm">
-                <th className="px-6 py-4 font-medium w-1/4">ID Pesanan</th>
                 <th className="px-6 py-4 font-medium w-1/3">Nama Produk</th>
                 <th className="px-6 py-4 font-medium">Jumlah</th>
                 <th className="px-6 py-4 font-medium">Total Harga</th>
@@ -123,13 +122,12 @@ export default function OrdersPage() {
             </thead>
             <tbody className="divide-y divide-slate-100">
               {loading ? (
-                <tr><td colSpan={5} className="text-center py-12 text-slate-400">Memuat data pesanan...</td></tr>
+                <tr><td colSpan={4} className="text-center py-12 text-slate-400">Memuat data pesanan...</td></tr>
               ) : filteredOrders.length === 0 ? (
-                <tr><td colSpan={5} className="text-center py-12 text-slate-400">Belum ada pesanan yang sesuai.</td></tr>
+                <tr><td colSpan={4} className="text-center py-12 text-slate-400">Belum ada pesanan yang sesuai.</td></tr>
               ) : (
                 currentOrders.map((o) => (
                   <tr key={o.id} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="px-6 py-4 text-xs font-mono text-slate-500">{o.id}</td>
                     <td className="px-6 py-4 font-semibold text-slate-800">{getProductName(o.productId)}</td>
                     <td className="px-6 py-4 text-slate-600 font-medium">{o.quantity}</td>
                     <td className="px-6 py-4 text-emerald-600 font-bold">Rp {(getProductPrice(o.productId) * o.quantity).toLocaleString('id-ID')}</td>

@@ -15,6 +15,7 @@ import (
 type OrderRepository interface {
 	Create(ctx context.Context, order *models.Order) error
 	FindAll(ctx context.Context) ([]models.Order, error)
+	DeleteByProductID(ctx context.Context, productID string) error
 }
 
 type orderRepository struct {
@@ -51,4 +52,9 @@ func (r *orderRepository) FindAll(ctx context.Context) ([]models.Order, error) {
 		orders = []models.Order{}
 	}
 	return orders, nil
+}
+
+func (r *orderRepository) DeleteByProductID(ctx context.Context, productID string) error {
+	_, err := r.collection.DeleteMany(ctx, bson.M{"productId": productID})
+	return err
 }

@@ -27,6 +27,7 @@ func (m *mockProductClient) UpdateProduct(productID string, product *models.Prod
 type mockOrderRepository struct {
 	CreateFunc  func(ctx context.Context, order *models.Order) error
 	FindAllFunc func(ctx context.Context) ([]models.Order, error)
+	DeleteByProductIDFunc func(ctx context.Context, productID string) error
 }
 
 func (m *mockOrderRepository) Create(ctx context.Context, order *models.Order) error {
@@ -35,6 +36,13 @@ func (m *mockOrderRepository) Create(ctx context.Context, order *models.Order) e
 
 func (m *mockOrderRepository) FindAll(ctx context.Context) ([]models.Order, error) {
 	return m.FindAllFunc(ctx)
+}
+
+func (m *mockOrderRepository) DeleteByProductID(ctx context.Context, productID string) error {
+	if m.DeleteByProductIDFunc != nil {
+		return m.DeleteByProductIDFunc(ctx, productID)
+	}
+	return nil
 }
 
 func TestCreateOrder_Success(t *testing.T) {

@@ -45,3 +45,11 @@ func (h *OrderHandler) GetAllOrders(c *fiber.Ctx) error {
 
 	return c.JSON(orders)
 }
+
+func (h *OrderHandler) DeleteOrdersByProduct(c *fiber.Ctx) error {
+	productID := c.Params("productId")
+	if err := h.service.DeleteOrdersByProduct(c.Context(), productID); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+	return c.SendStatus(fiber.StatusNoContent)
+}

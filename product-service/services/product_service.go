@@ -3,6 +3,8 @@ package services
 import (
 	"context"
 	"errors"
+	"net/http"
+	"time"
 
 	"product-service/models"
 	"product-service/repositories"
@@ -55,5 +57,17 @@ func (s *productService) DeleteProduct(ctx context.Context, id string) error {
 	if err != nil {
 		return errors.New("product not found")
 	}
-	return s.repo.Delete(ctx, id)
+	err = s.repo.Delete(ctx, id)
+	if err != nil {
+		return err
+	}
+
+	// Cascade delete orders via HTTP request to order-service
+	req, err := http.NewRequestWithContext(ctx, "DELETE", "http://order-service:8002/orders/product/"+id, nil)
+	if err == nil {
+		client := &http.Client{Timeout: 5 * time.Second}
+		client.Do(req)
+	}
+
+	return nil
 }

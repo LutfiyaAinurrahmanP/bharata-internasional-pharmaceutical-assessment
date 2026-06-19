@@ -71,18 +71,18 @@ Dokumen ini berisi daftar tugas (*checklist*) langkah demi langkah untuk menyele
 - [x] Membuat `Dockerfile` untuk Frontend.
 
 ## Phase 6: Dokumentasi & Finalisasi (Sangat Penting)
-- [ ] Uji coba sistem secara keseluruhan menjalankan `docker-compose up --build`.
-- [ ] Uji skenario: Produk tidak ada, stok kurang, dan order sukses.
-- [ ] Menulis jawaban untuk **3 Pertanyaan Arsitektur**:
-  - [ ] 1. Alasan di balik desain *collection* MongoDB (embed vs reference).
-  - [ ] 2. Kelemahan memanggil *product service* langsung dari *order service* dan usulan perbaikannya (misal: kompensasi transaksi, *message broker*).
-  - [ ] 3. Persiapan arsitektur ke depan jika jumlah *service* bertambah banyak.
-- [ ] Menyusun **README.md** yang komprehensif:
-  - [ ] Cara menjalankan aplikasi (instruksi `docker-compose`).
-  - [ ] Daftar endpoint lengkap.
-  - [ ] Contoh *request* (cURL / Postman).
-  - [ ] Jawaban 3 pertanyaan arsitektur.
-- [ ] Pembersihan kode akhir (Pastikan tidak ada *password/secret key* yang *hardcoded* di source code).
+- [x] Uji coba sistem secara keseluruhan menjalankan `docker-compose up --build`.
+- [x] Uji skenario: Produk tidak ada, stok kurang, dan order sukses.
+- [x] Menulis jawaban untuk **3 Pertanyaan Arsitektur**:
+  - [x] 1. Alasan di balik desain *collection* MongoDB (embed vs reference).
+  - [x] 2. Kelemahan memanggil *product service* langsung dari *order service* dan usulan perbaikannya (misal: kompensasi transaksi, *message broker*).
+  - [x] 3. Persiapan arsitektur ke depan jika jumlah *service* bertambah banyak.
+- [x] Menyusun **README.md** yang komprehensif:
+  - [x] Cara menjalankan aplikasi (instruksi `docker-compose`).
+  - [x] Daftar endpoint lengkap.
+  - [x] Contoh *request* (cURL / Postman).
+  - [x] Jawaban 3 pertanyaan arsitektur.
+- [x] Pembersihan kode akhir (Pastikan tidak ada *password/secret key* yang *hardcoded* di source code).
 
 ## Bonus Tasks (Telah Diselesaikan)
 - [x] Konfigurasi Orkestrasi (*Docker-Compose*)
