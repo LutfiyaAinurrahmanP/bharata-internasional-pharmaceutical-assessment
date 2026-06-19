@@ -47,13 +47,13 @@ Dokumen ini berisi daftar tugas (*checklist*) langkah demi langkah untuk menyele
 - [x] Membuat `Dockerfile` untuk Order Service.
 
 ## Phase 4: API Gateway (:8000) - Go + Fiber
-- [ ] Inisialisasi modul Go (`go mod init api-gateway`).
-- [ ] Setup aplikasi Fiber.
-- [ ] Implementasi konfigurasi *Proxy / Forwarding* request.
-- [ ] Mendaftarkan Aturan Routing:
-  - [ ] Semua request `/products/*` diteruskan ke `http://product-service:8001`
-  - [ ] Semua request `/orders/*` diteruskan ke `http://order-service:8002`
-- [ ] Membuat `Dockerfile` untuk API Gateway.
+- [x] Inisialisasi modul Go (`go mod init api-gateway`).
+- [x] Setup aplikasi Fiber.
+- [x] Implementasi konfigurasi *Proxy / Forwarding* request (dilengkapi dengan CORS middleware).
+- [x] Mendaftarkan Aturan Routing:
+  - [x] Semua request `/products/*` diteruskan ke `http://product-service:8001`
+  - [x] Semua request `/orders/*` diteruskan ke `http://order-service:8002`
+- [x] Membuat `Dockerfile` untuk API Gateway.
 
 ## Phase 5: Frontend (:3000) - Next.js
 - [ ] Inisialisasi proyek Next.js (`npx create-next-app@latest`).
