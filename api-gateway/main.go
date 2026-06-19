@@ -47,12 +47,14 @@ func main() {
 		if err := proxy.Do(c, productServiceURL+"/products"); err != nil {
 			return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{"error": "Product Service is currently unavailable / dead"})
 		}
+		c.Set("Access-Control-Allow-Origin", "*")
 		return nil
 	})
 	app.All("/products/*", func(c *fiber.Ctx) error {
 		if err := proxy.Do(c, productServiceURL+"/products/"+c.Params("*")); err != nil {
 			return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{"error": "Product Service is currently unavailable / dead"})
 		}
+		c.Set("Access-Control-Allow-Origin", "*")
 		return nil
 	})
 
@@ -60,12 +62,14 @@ func main() {
 		if err := proxy.Do(c, orderServiceURL+"/orders"); err != nil {
 			return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{"error": "Order Service is currently unavailable / dead"})
 		}
+		c.Set("Access-Control-Allow-Origin", "*")
 		return nil
 	})
 	app.All("/orders/*", func(c *fiber.Ctx) error {
 		if err := proxy.Do(c, orderServiceURL+"/orders/"+c.Params("*")); err != nil {
 			return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{"error": "Order Service is currently unavailable / dead"})
 		}
+		c.Set("Access-Control-Allow-Origin", "*")
 		return nil
 	})
 

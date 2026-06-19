@@ -7,8 +7,8 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   const navItems = [
-    { name: 'Products', href: '/', icon: Package },
-    { name: 'Orders', href: '/orders', icon: ShoppingCart },
+    { name: 'Produk', href: '/', icon: Package },
+    { name: 'Pesanan', href: '/orders', icon: ShoppingCart },
   ];
 
   return (
@@ -17,7 +17,7 @@ export default function Sidebar() {
         <Leaf className="h-8 w-8 text-emerald-500 mr-3" />
         <div>
             <span className="text-xl font-bold text-slate-800 block">BIP ERP</span>
-            <span className="text-xs text-slate-500 font-medium tracking-wider">HERBAL MEDICINE</span>
+            <span className="text-xs text-slate-500 font-medium tracking-wider">OBAT HERBAL</span>
         </div>
       </div>
       <nav className="flex-1 p-4 space-y-2 mt-4">
@@ -46,8 +46,8 @@ export default function Sidebar() {
                 A
             </div>
             <div className="ml-3">
-                <p className="text-sm font-semibold text-slate-800">Admin User</p>
-                <p className="text-xs text-slate-500">Warehouse Staff</p>
+                <p className="text-sm font-semibold text-slate-800">Admin</p>
+                <p className="text-xs text-slate-500">Staf Gudang</p>
             </div>
         </div>
       </div>
