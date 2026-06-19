@@ -3,29 +3,29 @@
 Dokumen ini berisi daftar tugas (*checklist*) langkah demi langkah untuk menyelesaikan *take-home test* pengembangan sistem *mini-microservices* yang terdiri dari Product Service, Order Service, API Gateway, dan Frontend.
 
 ## Phase 1: Inisialisasi Proyek & Infrastruktur Dasar
-- [ ] Inisialisasi Git Repository (`git init`).
-- [ ] Membuat struktur folder proyek dasar:
+- [x] Inisialisasi Git Repository (`git init`).
+- [x] Membuat struktur folder proyek dasar:
   - `product-service/`
   - `order-service/`
   - `api-gateway/`
   - `frontend/`
-- [ ] Membuat file `docker-compose.yml` untuk orkestrasi *service* dan MongoDB.
-- [ ] Menyiapkan struktur file `.env` agar tidak ada *hardcoded credential*.
+- [x] Membuat file `docker-compose.yml` untuk orkestrasi *service* dan MongoDB.
+- [x] Menyiapkan struktur file `.env` agar tidak ada *hardcoded credential*.
 
 ## Phase 2: Product Service (:8001) - Go + Fiber
-- [ ] Inisialisasi modul Go (`go mod init product-service`).
-- [ ] Setup koneksi database ke MongoDB (Database: `product_db`, Collection: `products`).
-- [ ] Membuat Model/Schema `Product` (fields: `id`, `name`, `price`, `stock`).
-- [ ] Implementasi **Repository Layer** (Logika operasi CRUD ke MongoDB).
-- [ ] Implementasi **Service Layer** (Logika bisnis).
-- [ ] Implementasi **Handler Layer** (Menerima HTTP Request & validasi input).
-- [ ] Mendaftarkan Routes:
-  - [ ] `POST /products` (Buat produk)
-  - [ ] `GET /products` (List produk)
-  - [ ] `GET /products/:id` (Detail produk)
-  - [ ] `PUT /products/:id` (Update produk & update stok)
-  - [ ] `DELETE /products/:id` (Hapus produk)
-- [ ] Membuat `Dockerfile` untuk Product Service.
+- [x] Inisialisasi modul Go (`go mod init product-service`).
+- [x] Setup koneksi database ke MongoDB (Database: `product_db`, Collection: `products`).
+- [x] Membuat Model/Schema `Product` (fields: `id`, `name`, `price`, `stock`).
+- [x] Implementasi **Repository Layer** (Logika operasi CRUD ke MongoDB).
+- [x] Implementasi **Service Layer** (Logika bisnis).
+- [x] Implementasi **Handler Layer** (Menerima HTTP Request & validasi input).
+- [x] Mendaftarkan Routes:
+  - [x] `POST /products` (Buat produk)
+  - [x] `GET /products` (List produk)
+  - [x] `GET /products/:id` (Detail produk)
+  - [x] `PUT /products/:id` (Update produk & update stok)
+  - [x] `DELETE /products/:id` (Hapus produk)
+- [x] Membuat `Dockerfile` untuk Product Service.
 
 ## Phase 3: Order Service (:8002) - Go + Fiber
 - [ ] Inisialisasi modul Go (`go mod init order-service`).
