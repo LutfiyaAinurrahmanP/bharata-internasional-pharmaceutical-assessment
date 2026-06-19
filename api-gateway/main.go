@@ -3,22 +3,28 @@ package main
 import (
 	"log"
 	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/proxy"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	// (BONUS) Env Config
+	_ = godotenv.Load("../.env")
+
 	app := fiber.New()
 
-	// Middlewares
+	// (BONUS) Logging middleware
 	app.Use(logger.New())
 	app.Use(recover.New())
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "*", // Mengizinkan frontend (port 3000) mengakses gateway
+		AllowOrigins: "*",
 		AllowHeaders: "Origin, Content-Type, Accept",
 	}))
 
@@ -36,20 +42,31 @@ func main() {
 		return c.SendString("API Gateway is up and running!")
 	})
 
-	// Forward /products/* ke Product Service
+	// (BONUS) Graceful Handling: Tangkap error jika microservice down (503 Service Unavailable)
 	app.All("/products", func(c *fiber.Ctx) error {
-		return proxy.Do(c, productServiceURL+"/products")
+		if err := proxy.Do(c, productServiceURL+"/products"); err != nil {
+			return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{"error": "Product Service is currently unavailable / dead"})
+		}
+		return nil
 	})
 	app.All("/products/*", func(c *fiber.Ctx) error {
-		return proxy.Do(c, productServiceURL+"/products/"+c.Params("*"))
+		if err := proxy.Do(c, productServiceURL+"/products/"+c.Params("*")); err != nil {
+			return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{"error": "Product Service is currently unavailable / dead"})
+		}
+		return nil
 	})
 
-	// Forward /orders/* ke Order Service
 	app.All("/orders", func(c *fiber.Ctx) error {
-		return proxy.Do(c, orderServiceURL+"/orders")
+		if err := proxy.Do(c, orderServiceURL+"/orders"); err != nil {
+			return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{"error": "Order Service is currently unavailable / dead"})
+		}
+		return nil
 	})
 	app.All("/orders/*", func(c *fiber.Ctx) error {
-		return proxy.Do(c, orderServiceURL+"/orders/"+c.Params("*"))
+		if err := proxy.Do(c, orderServiceURL+"/orders/"+c.Params("*")); err != nil {
+			return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{"error": "Order Service is currently unavailable / dead"})
+		}
+		return nil
 	})
 
 	port := os.Getenv("PORT")
@@ -57,6 +74,18 @@ func main() {
 		port = "8000"
 	}
 
-	log.Printf("Starting API Gateway on port %s", port)
-	log.Fatal(app.Listen(":" + port))
+	// (BONUS) Graceful Shutdown
+	go func() {
+		log.Printf("Starting API Gateway on port %s", port)
+		if err := app.Listen(":" + port); err != nil {
+			log.Panic(err)
+		}
+	}()
+
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+	<-c
+
+	log.Println("Gracefully shutting down API Gateway...")
+	_ = app.Shutdown()
 }

@@ -28,6 +28,9 @@ func (h *OrderHandler) CreateOrder(c *fiber.Ctx) error {
 		if err == services.ErrInsufficientStock {
 			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
 		}
+		if err.Error() == "product service is unavailable" || err.Error() == "failed to deduct product stock" {
+			return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{"error": err.Error()})
+		}
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 	}
 

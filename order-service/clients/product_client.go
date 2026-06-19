@@ -32,7 +32,7 @@ func (c *productClient) GetProduct(productID string) (*models.ProductResponse, e
 	url := fmt.Sprintf("%s/products/%s", c.baseURL, productID)
 	resp, err := http.Get(url)
 	if err != nil {
-		return nil, err
+		return nil, errors.New("product service is unavailable") // Graceful handling for connection refused
 	}
 	defer resp.Body.Close()
 
@@ -67,7 +67,7 @@ func (c *productClient) UpdateProduct(productID string, product *models.ProductR
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		return err
+		return errors.New("product service is unavailable") // Graceful handling
 	}
 	defer resp.Body.Close()
 

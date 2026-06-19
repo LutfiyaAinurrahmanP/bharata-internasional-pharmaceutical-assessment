@@ -83,3 +83,10 @@ Dokumen ini berisi daftar tugas (*checklist*) langkah demi langkah untuk menyele
   - [ ] Contoh *request* (cURL / Postman).
   - [ ] Jawaban 3 pertanyaan arsitektur.
 - [ ] Pembersihan kode akhir (Pastikan tidak ada *password/secret key* yang *hardcoded* di source code).
+
+## Bonus Tasks (Telah Diselesaikan)
+- [x] Konfigurasi Orkestrasi (*Docker-Compose*)
+- [x] Environment Config (*`.env` & `godotenv`*)
+- [x] Unit Testing (*Product & Order Service*)
+- [x] Logging (*Fiber Middleware*)
+- [x] Graceful Handling (*Penanganan Error 503 & Graceful Shutdown*)
