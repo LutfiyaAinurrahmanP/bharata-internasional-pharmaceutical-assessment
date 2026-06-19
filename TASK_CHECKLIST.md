@@ -1,0 +1,85 @@
+# 📝 Project Implementation Checklist: Mini-Microservices (BIP-ERP)
+
+Dokumen ini berisi daftar tugas (*checklist*) langkah demi langkah untuk menyelesaikan *take-home test* pengembangan sistem *mini-microservices* yang terdiri dari Product Service, Order Service, API Gateway, dan Frontend.
+
+## Phase 1: Inisialisasi Proyek & Infrastruktur Dasar
+- [ ] Inisialisasi Git Repository (`git init`).
+- [ ] Membuat struktur folder proyek dasar:
+  - `product-service/`
+  - `order-service/`
+  - `api-gateway/`
+  - `frontend/`
+- [ ] Membuat file `docker-compose.yml` untuk orkestrasi *service* dan MongoDB.
+- [ ] Menyiapkan struktur file `.env` agar tidak ada *hardcoded credential*.
+
+## Phase 2: Product Service (:8001) - Go + Fiber
+- [ ] Inisialisasi modul Go (`go mod init product-service`).
+- [ ] Setup koneksi database ke MongoDB (Database: `product_db`, Collection: `products`).
+- [ ] Membuat Model/Schema `Product` (fields: `id`, `name`, `price`, `stock`).
+- [ ] Implementasi **Repository Layer** (Logika operasi CRUD ke MongoDB).
+- [ ] Implementasi **Service Layer** (Logika bisnis).
+- [ ] Implementasi **Handler Layer** (Menerima HTTP Request & validasi input).
+- [ ] Mendaftarkan Routes:
+  - [ ] `POST /products` (Buat produk)
+  - [ ] `GET /products` (List produk)
+  - [ ] `GET /products/:id` (Detail produk)
+  - [ ] `PUT /products/:id` (Update produk & update stok)
+  - [ ] `DELETE /products/:id` (Hapus produk)
+- [ ] Membuat `Dockerfile` untuk Product Service.
+
+## Phase 3: Order Service (:8002) - Go + Fiber
+- [ ] Inisialisasi modul Go (`go mod init order-service`).
+- [ ] Setup koneksi database ke MongoDB (Database: `order_db`, Collection: `orders`).
+- [ ] Membuat Model/Schema `Order` (fields: `id`, `productId`, `quantity`, dll).
+- [ ] Implementasi komponen HTTP Client untuk menembak API Product Service.
+- [ ] Implementasi **Repository Layer** (Menyimpan data *order* ke MongoDB).
+- [ ] Implementasi **Service Layer** (Logika Validasi & Transaksi):
+  - [ ] Panggil Product Service untuk cek eksistensi produk.
+  - [ ] Jika produk tidak ada -> *Return error 404*.
+  - [ ] Panggil Product Service untuk cek stok.
+  - [ ] Jika stok kurang -> *Return error 400*.
+  - [ ] Panggil Product Service untuk kurangi stok.
+  - [ ] Simpan data Order ke database Order Service.
+- [ ] Implementasi **Handler Layer** (Menerima HTTP Request).
+- [ ] Mendaftarkan Routes:
+  - [ ] `POST /orders` (Buat order)
+  - [ ] `GET /orders` (List order)
+- [ ] Membuat `Dockerfile` untuk Order Service.
+
+## Phase 4: API Gateway (:8000) - Go + Fiber
+- [ ] Inisialisasi modul Go (`go mod init api-gateway`).
+- [ ] Setup aplikasi Fiber.
+- [ ] Implementasi konfigurasi *Proxy / Forwarding* request.
+- [ ] Mendaftarkan Aturan Routing:
+  - [ ] Semua request `/products/*` diteruskan ke `http://product-service:8001`
+  - [ ] Semua request `/orders/*` diteruskan ke `http://order-service:8002`
+- [ ] Membuat `Dockerfile` untuk API Gateway.
+
+## Phase 5: Frontend (:3000) - Next.js
+- [ ] Inisialisasi proyek Next.js (`npx create-next-app@latest`).
+- [ ] Konfigurasi *Base URL API* untuk selalu menunjuk ke API Gateway (`http://localhost:8000`).
+- [ ] Pembuatan Halaman **Daftar Produk**:
+  - [ ] Fecth data produk dari `GET /products`.
+  - [ ] Tampilkan produk (nama, harga, stok) dengan antarmuka yang rapi.
+- [ ] Pembuatan Halaman/Modal **Tambah Produk**:
+  - [ ] Form input (nama, harga, stok).
+  - [ ] Fungsionalitas *submit* ke `POST /products`.
+- [ ] Pembuatan Halaman/Modal **Buat Pesanan (Order)**:
+  - [ ] Input pilihan produk (dropdown) dan jumlah barang (*quantity*).
+  - [ ] Fungsionalitas *submit* ke `POST /orders`.
+  - [ ] *Error Handling UI*: Tampilkan notifikasi jika sukses, atau pesan *error* jika stok kurang/produk tidak ditemukan.
+- [ ] Membuat `Dockerfile` untuk Frontend.
+
+## Phase 6: Dokumentasi & Finalisasi (Sangat Penting)
+- [ ] Uji coba sistem secara keseluruhan menjalankan `docker-compose up --build`.
+- [ ] Uji skenario: Produk tidak ada, stok kurang, dan order sukses.
+- [ ] Menulis jawaban untuk **3 Pertanyaan Arsitektur**:
+  - [ ] 1. Alasan di balik desain *collection* MongoDB (embed vs reference).
+  - [ ] 2. Kelemahan memanggil *product service* langsung dari *order service* dan usulan perbaikannya (misal: kompensasi transaksi, *message broker*).
+  - [ ] 3. Persiapan arsitektur ke depan jika jumlah *service* bertambah banyak.
+- [ ] Menyusun **README.md** yang komprehensif:
+  - [ ] Cara menjalankan aplikasi (instruksi `docker-compose`).
+  - [ ] Daftar endpoint lengkap.
+  - [ ] Contoh *request* (cURL / Postman).
+  - [ ] Jawaban 3 pertanyaan arsitektur.
+- [ ] Pembersihan kode akhir (Pastikan tidak ada *password/secret key* yang *hardcoded* di source code).
