@@ -28,23 +28,23 @@ Dokumen ini berisi daftar tugas (*checklist*) langkah demi langkah untuk menyele
 - [x] Membuat `Dockerfile` untuk Product Service.
 
 ## Phase 3: Order Service (:8002) - Go + Fiber
-- [ ] Inisialisasi modul Go (`go mod init order-service`).
-- [ ] Setup koneksi database ke MongoDB (Database: `order_db`, Collection: `orders`).
-- [ ] Membuat Model/Schema `Order` (fields: `id`, `productId`, `quantity`, dll).
-- [ ] Implementasi komponen HTTP Client untuk menembak API Product Service.
-- [ ] Implementasi **Repository Layer** (Menyimpan data *order* ke MongoDB).
-- [ ] Implementasi **Service Layer** (Logika Validasi & Transaksi):
-  - [ ] Panggil Product Service untuk cek eksistensi produk.
-  - [ ] Jika produk tidak ada -> *Return error 404*.
-  - [ ] Panggil Product Service untuk cek stok.
-  - [ ] Jika stok kurang -> *Return error 400*.
-  - [ ] Panggil Product Service untuk kurangi stok.
-  - [ ] Simpan data Order ke database Order Service.
-- [ ] Implementasi **Handler Layer** (Menerima HTTP Request).
-- [ ] Mendaftarkan Routes:
-  - [ ] `POST /orders` (Buat order)
-  - [ ] `GET /orders` (List order)
-- [ ] Membuat `Dockerfile` untuk Order Service.
+- [x] Inisialisasi modul Go (`go mod init order-service`).
+- [x] Setup koneksi database ke MongoDB (Database: `order_db`, Collection: `orders`).
+- [x] Membuat Model/Schema `Order` (fields: `id`, `productId`, `quantity`, dll).
+- [x] Implementasi komponen HTTP Client untuk menembak API Product Service.
+- [x] Implementasi **Repository Layer** (Menyimpan data *order* ke MongoDB).
+- [x] Implementasi **Service Layer** (Logika Validasi & Transaksi):
+  - [x] Panggil Product Service untuk cek eksistensi produk.
+  - [x] Jika produk tidak ada -> *Return error 404*.
+  - [x] Panggil Product Service untuk cek stok.
+  - [x] Jika stok kurang -> *Return error 400*.
+  - [x] Panggil Product Service untuk kurangi stok.
+  - [x] Simpan data Order ke database Order Service.
+- [x] Implementasi **Handler Layer** (Menerima HTTP Request).
+- [x] Mendaftarkan Routes:
+  - [x] `POST /orders` (Buat order)
+  - [x] `GET /orders` (List order)
+- [x] Membuat `Dockerfile` untuk Order Service.
 
 ## Phase 4: API Gateway (:8000) - Go + Fiber
 - [ ] Inisialisasi modul Go (`go mod init api-gateway`).
