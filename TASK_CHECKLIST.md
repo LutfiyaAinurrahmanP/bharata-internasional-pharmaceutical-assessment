@@ -56,19 +56,19 @@ Dokumen ini berisi daftar tugas (*checklist*) langkah demi langkah untuk menyele
 - [x] Membuat `Dockerfile` untuk API Gateway.
 
 ## Phase 5: Frontend (:3000) - Next.js
-- [ ] Inisialisasi proyek Next.js (`npx create-next-app@latest`).
-- [ ] Konfigurasi *Base URL API* untuk selalu menunjuk ke API Gateway (`http://localhost:8000`).
-- [ ] Pembuatan Halaman **Daftar Produk**:
-  - [ ] Fecth data produk dari `GET /products`.
-  - [ ] Tampilkan produk (nama, harga, stok) dengan antarmuka yang rapi.
-- [ ] Pembuatan Halaman/Modal **Tambah Produk**:
-  - [ ] Form input (nama, harga, stok).
-  - [ ] Fungsionalitas *submit* ke `POST /products`.
-- [ ] Pembuatan Halaman/Modal **Buat Pesanan (Order)**:
-  - [ ] Input pilihan produk (dropdown) dan jumlah barang (*quantity*).
-  - [ ] Fungsionalitas *submit* ke `POST /orders`.
-  - [ ] *Error Handling UI*: Tampilkan notifikasi jika sukses, atau pesan *error* jika stok kurang/produk tidak ditemukan.
-- [ ] Membuat `Dockerfile` untuk Frontend.
+- [x] Inisialisasi proyek Next.js (`npx create-next-app@latest`).
+- [x] Konfigurasi *Base URL API* untuk selalu menunjuk ke API Gateway (`http://localhost:8000`).
+- [x] Pembuatan Halaman **Daftar Produk**:
+  - [x] Fecth data produk dari `GET /products`.
+  - [x] Tampilkan produk (nama, harga, stok) dengan antarmuka yang rapi.
+- [x] Pembuatan Halaman/Modal **Tambah Produk**:
+  - [x] Form input (nama, harga, stok).
+  - [x] Fungsionalitas *submit* ke `POST /products`.
+- [x] Pembuatan Halaman/Modal **Buat Pesanan (Order)**:
+  - [x] Input pilihan produk (dropdown) dan jumlah barang (*quantity*).
+  - [x] Fungsionalitas *submit* ke `POST /orders`.
+  - [x] *Error Handling UI*: Tampilkan notifikasi jika sukses, atau pesan *error* jika stok kurang/produk tidak ditemukan.
+- [x] Membuat `Dockerfile` untuk Frontend.
 
 ## Phase 6: Dokumentasi & Finalisasi (Sangat Penting)
 - [ ] Uji coba sistem secara keseluruhan menjalankan `docker-compose up --build`.
