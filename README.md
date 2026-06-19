@@ -17,16 +17,28 @@ Pastikan komputer Anda sudah terpasang:
 
 ## Cara Menjalankan
 
-Proyek ini dirancang agar dapat berjalan lancar secara lintas *platform* (Windows, macOS, dan Linux) menggunakan Docker. Anda dapat menjalankan seluruh arsitektur (termasuk database MongoDB) dengan satu perintah sederhana:
+Proyek ini dirancang agar dapat berjalan lancar secara lintas *platform* (Windows, macOS, dan Linux) menggunakan Docker. Berikut adalah langkah-langkah untuk menjalankan aplikasi dari awal:
 
+**1. Kloning Repositori**
+Silakan *clone* repositori ini ke komputer lokal Anda dan masuk ke dalam direktorinya:
 ```bash
-# Menjalankan semua service di latar belakang (detached mode)
-docker-compose up --build -d
+git clone https://github.com/LutfiyaAinurrahmanP/bharata-internasional-pharmaceutical-assessment.git
 ```
 
+**2. Persiapan Environment Variables**
+Buat file `.env` di direktori utama (root) proyek ini. Anda cukup menyalin dari file konfigurasi contoh yang telah disediakan:
+```bash
+cp .env.example .env
+```
+
+**3. Menjalankan Aplikasi dengan Docker Compose**
+Jalankan seluruh arsitektur (termasuk database MongoDB, API Gateway, dan semua microservices) dengan satu perintah sederhana:
+```bash
+docker-compose up --build -d
+```
 *(Catatan: Pengguna Linux mungkin perlu menambahkan prefix `sudo` di depan perintah docker jika belum melakukan konfigurasi post-install docker).*
 
-Setelah semua container berhasil berjalan (biasanya memakan waktu beberapa detik), Anda dapat mengakses aplikasi melalui:
+Setelah semua container berhasil di-*build* dan berjalan (biasanya memakan waktu beberapa detik hingga beberapa menit tergantung koneksi internet), Anda dapat mengakses aplikasi melalui:
 - **Frontend (Web UI):** [http://localhost:3000](http://localhost:3000)
 - **API Gateway:** [http://localhost:8000](http://localhost:8000)
 
